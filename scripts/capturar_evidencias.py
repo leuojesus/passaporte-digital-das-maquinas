@@ -92,6 +92,8 @@ try:
         page.get_by_text("Documentos Técnicos").first.wait_for()
         page.get_by_text("QR Code da máquina").wait_for()
         assert "Manual Técnico.pdf" in page.locator("body").inner_text()
+        page.locator(".qr-panel img").wait_for(state="visible")
+        page.wait_for_function("() => { const img = document.querySelector('.qr-panel img'); return img && img.complete && img.naturalWidth > 0; }")
         page.screenshot(path=str(DESTINO / "02_cadastro_documentos_real.png"), full_page=True)
 
         page.goto(BASE + str(maquina.get_absolute_url()), wait_until="domcontentloaded")
