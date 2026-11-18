@@ -28,3 +28,33 @@ button,a,input,select,textarea{outline-offset:3px}button:focus-visible,a:focus-v
 .doc-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid var(--borda)}.doc-row small{display:block;margin-left:23px;color:#61748c}.doc-item{border:1px solid var(--borda);border-radius:5px;padding:12px;margin:8px 0}.small-button{font-size:14px}
 .qr-panel img{display:block;width:155px;max-width:100%;height:auto}.qr-panel a{display:inline-block;margin-top:10px}
 @media(max-width:520px){.content{padding:22px 14px 55px}.brand{font-size:15px}.brand-icon{font-size:28px}.panel{padding:16px 14px}.panel h2{margin:-16px -14px 17px;padding:13px 14px}.action{padding:18px 14px}.action strong{font-size:17px}.action small{font-size:13px}.facts div{grid-template-columns:1fr}.search{grid-template-columns:1fr}.action-icon{font-size:25px}}
+
+
+/* Acessibilidade: alternância real de alto contraste, sem alteração das rotas. */
+.accessibility-tools{display:flex;align-items:center;gap:8px}
+.contrast-toggle{cursor:pointer;min-height:44px;min-width:104px;padding:8px 10px;border:1px solid #c5dbfa;border-radius:6px;background:transparent;color:#fff;font-size:12px;font-weight:700}
+.contrast-toggle:hover,.contrast-toggle:focus-visible{background:#194f8b}
+html.alto-contraste body,html.alto-contraste .content{color:#fff;background:#000}
+html.alto-contraste .topbar{background:#000;border-bottom:3px solid #ffdb00}
+html.alto-contraste .brand,html.alto-contraste .brand small{color:#fff}
+html.alto-contraste .contrast-toggle{background:#ffdf00;color:#000;border-color:#ffdf00}
+html.alto-contraste .menu summary{border:2px solid #ffdf00;color:#ffdf00}
+html.alto-contraste h1,html.alto-contraste h2,html.alto-contraste h3,html.alto-contraste p,html.alto-contraste label,html.alto-contraste dt,html.alto-contraste dd{color:#fff}
+html.alto-contraste .panel,html.alto-contraste .welcome,html.alto-contraste .action,html.alto-contraste .list-card,html.alto-contraste .doc-item,html.alto-contraste .menu nav{background:#000;color:#fff;border:2px solid #fff}
+html.alto-contraste .panel h2{background:#222;color:#ffdf00;border-bottom:2px solid #ffdf00}
+html.alto-contraste .action strong,html.alto-contraste .action small,html.alto-contraste .list-card span,html.alto-contraste .list-card small,html.alto-contraste .doc-row small,html.alto-contraste .welcome span,html.alto-contraste .welcome strong{color:#fff}
+html.alto-contraste .primary-button,html.alto-contraste .outline-button{background:#ffdf00;color:#000;border:2px solid #fff}
+html.alto-contraste .form-control,html.alto-contraste .search input{background:#000;color:#fff;border:2px solid #fff}
+html.alto-contraste .feedback{background:#111;color:#fff;border:2px solid #ffdf00}
+html.alto-contraste .menu nav a,html.alto-contraste .menu nav button{background:#000;color:#fff}
+html.alto-contraste a:not(.primary-button):not(.outline-button):not(.action):not(.brand):not(.list-card){color:#ffdf00}
+html.alto-contraste .facts div,html.alto-contraste .doc-row{border-color:#fff}
+html.alto-contraste .required,html.alto-contraste .field-error{color:#ffdf00}
+html.alto-contraste button:focus-visible,html.alto-contraste a:focus-visible,html.alto-contraste input:focus-visible{outline:3px solid #ffdf00;outline-offset:3px}
+@media(max-width:520px){
+  .topbar-inner{gap:6px}
+  .contrast-toggle{min-width:86px;padding:6px;font-size:11px}
+  .accessibility-tools{gap:5px}
+  .brand{gap:6px;font-size:14px}
+  .brand-icon{font-size:24px}
+}
