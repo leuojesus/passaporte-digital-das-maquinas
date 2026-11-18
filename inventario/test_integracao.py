@@ -53,6 +53,19 @@ class FluxoDeMaquinasTests(TestCase):
         self.assertEqual(len(resposta.context["maquinas"]), 10)
         self.assertContains(resposta, "Anterior")
 
+    def test_busca_por_cliente_encontra_somente_maquina_correspondente(self):
+        Maquina.objects.create(
+            modelo="Serra Industrial",
+            numero_serie="TCN-CLIENTE",
+            cliente="Oficina de Exemplo",
+        )
+        self.client.force_login(self.admin)
+        resposta = self.client.get(reverse("maquinas"), {"q": "Oficina de Exemplo"})
+        self.assertEqual(resposta.status_code, 200)
+        self.assertContains(resposta, "TCN-CLIENTE")
+        self.assertNotContains(resposta, "TCN-001")
+        self.assertContains(resposta, "Buscar por modelo, número de série ou cliente")
+
     def test_qr_exige_login(self):
         resposta = self.client.get(reverse("maquina_qr", args=[self.maquina.pk]))
         self.assertEqual(resposta.status_code, 302)
