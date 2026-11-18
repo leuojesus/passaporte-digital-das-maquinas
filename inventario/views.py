@@ -1,6 +1,7 @@
 from io import BytesIO
 from pathlib import Path
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import FileResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -24,7 +25,8 @@ def maquinas(request):
     itens = Maquina.objects.filter(ativo=True)
     if q:
         itens = itens.filter(Q(modelo__icontains=q) | Q(numero_serie__icontains=q))
-    return render(request, "inventario/maquinas.html", {"maquinas": itens[:100], "q": q})
+    pagina = Paginator(itens.order_by("modelo", "numero_serie"), 10).get_page(request.GET.get("page"))
+    return render(request, "inventario/maquinas.html", {"maquinas": pagina.object_list, "page_obj": pagina, "q": q})
 
 @login_required
 @permission_required("inventario.gerenciar_maquinas", raise_exception=True)
