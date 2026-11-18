@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Cadastro de máquina{% endblock %}
+{% block content %}
+<h1>Cadastro de Máquina</h1>
+<section class="panel"><h2>Dados da máquina</h2><form method="post">{% csrf_token %}<input type="hidden" name="acao" value="salvar_maquina">
+{% include "form_fields.html" with form=maquina_form %}<button class="primary-button" type="submit">▣ Salvar máquina</button></form></section>
+<section class="panel"><h2>Documentos Técnicos</h2><form method="post" enctype="multipart/form-data">{% csrf_token %}<input type="hidden" name="acao" value="adicionar_documento">
+{% include "form_fields.html" with form=documento_form %}<button class="primary-button" type="submit">＋ Adicionar documento</button></form>
+{% if maquina.documentos.all %}<h3>Documentos associados</h3>{% for doc in maquina.documentos.all %}<div class="doc-item">📄 {{ doc.titulo }}</div>{% endfor %}{% endif %}</section>
+<section class="panel qr-panel"><h2>QR Code da máquina</h2><img src="{% url 'maquina_qr' maquina.pk %}" alt="Código QR de acesso à ficha da máquina {{ maquina.numero_serie }}"><a href="{{ maquina.get_absolute_url }}">Abrir ficha digital</a></section>
+<a class="outline-button" href="{% url 'inicio' %}">← Voltar ao menu</a>
+{% endblock %}

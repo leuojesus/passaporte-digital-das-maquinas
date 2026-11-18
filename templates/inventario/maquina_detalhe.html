@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Ficha técnica{% endblock %}
+{% block content %}
+<h1>Ficha Técnica da Máquina</h1>
+<section class="panel"><h2>{{ maquina.modelo }}</h2><dl class="facts">
+<div><dt>Modelo:</dt><dd>{{ maquina.modelo }}</dd></div><div><dt>Número de série:</dt><dd>{{ maquina.numero_serie }}</dd></div>
+<div><dt>Cliente:</dt><dd>{{ maquina.cliente }}</dd></div><div><dt>Descrição:</dt><dd>{{ maquina.descricao_tecnica|default:"Não informada" }}</dd></div></dl></section>
+<section class="panel"><h2>Documentos disponíveis</h2>
+{% for doc in maquina.documentos.all %}<div class="doc-row"><span>📄 <strong>{{ doc.titulo }}</strong><small>{{ doc.get_categoria_display }}</small></span>
+{% if perms.inventario.view_documento %}<a class="primary-button small-button" href="{% url 'documento_abrir' doc.pk %}">↗ Abrir</a>{% else %}<span>Sem permissão</span>{% endif %}</div>
+{% empty %}<div class="feedback feedback-warning">Nenhum documento disponível.</div>{% endfor %}</section>
+{% if maquina.manutencoes.all %}<section class="panel"><h2>Histórico de manutenção</h2>{% for item in maquina.manutencoes.all %}<div class="doc-item">{{ item.data_manutencao }} — {{ item.problema }}</div>{% endfor %}</section>{% endif %}
+{% if perms.inventario.add_manutencao %}<a class="outline-button" href="{% url 'manutencao_nova' maquina.pk %}">＋ Registrar manutenção</a>{% endif %}
+{% if perms.inventario.gerenciar_maquinas %}<a class="outline-button" href="{% url 'maquina_editar' maquina.pk %}">Editar máquina</a>{% endif %}
+<a class="outline-button" href="{% url 'inicio' %}">← Voltar ao menu</a>
+{% endblock %}

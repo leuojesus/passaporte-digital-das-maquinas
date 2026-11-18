@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Registrar manutenção{% endblock %}
+{% block content %}<h1>Registrar manutenção</h1><p>{{ maquina.modelo }} — {{ maquina.numero_serie }}</p><section class="panel">
+<form method="post">{% csrf_token %}{% include "form_fields.html" with form=form %}<button class="primary-button" type="submit">Salvar manutenção</button></form></section>
+<a class="outline-button" href="{{ maquina.get_absolute_url }}">← Voltar</a>{% endblock %}

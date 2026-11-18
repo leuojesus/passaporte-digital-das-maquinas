@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Máquinas{% endblock %}
+{% block content %}
+<h1>Máquinas cadastradas</h1><form method="get" class="search"><label for="q">Buscar por modelo ou número de série</label><input id="q" type="search" name="q" value="{{ q }}"><button class="primary-button" type="submit">Buscar</button></form>
+{% for maquina in maquinas %}<a class="list-card" href="{{ maquina.get_absolute_url }}"><strong>{{ maquina.modelo }}</strong><span>Série: {{ maquina.numero_serie }}</span><small>Cliente: {{ maquina.cliente }}</small></a>{% empty %}<div class="feedback feedback-warning">Nenhuma máquina encontrada.</div>{% endfor %}
+<a class="outline-button mt-4" href="{% url 'inicio' %}">← Voltar ao menu</a>
+{% endblock %}

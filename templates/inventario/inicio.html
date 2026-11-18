@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<h1>Passaporte Digital das Máquinas</h1><p class="lead">Gestão da documentação técnica das máquinas</p>
+<div class="welcome"><span>●</span><div><strong>Olá, {{ user.first_name|default:user.username }}</strong><p>Acesse as funcionalidades do sistema.</p></div></div>
+<div class="actions">
+{% if perms.inventario.gerenciar_maquinas %}<a class="action action-primary" href="{% url 'maquina_nova' %}"><span class="action-icon">＋</span><span><strong>Cadastrar máquina</strong><small>Registre uma nova máquina, anexe documentos e gere o QR Code.</small></span><span class="arrow">›</span></a>{% endif %}
+<a class="action" href="{% url 'maquinas' %}"><span class="action-icon">▤</span><span><strong>Consultar documentação</strong><small>Acesse a ficha técnica por número de série ou QR Code.</small></span><span class="arrow">›</span></a>
+</div>
+<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="outline-button mt-5" type="submit">⇥ Sair do sistema</button></form>
+{% endblock %}

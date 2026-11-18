@@ -1,0 +1,25 @@
+services:
+  database:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: passaporte
+      POSTGRES_USER: passaporte
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD em .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  web:
+    build: .
+    env_file: .env
+    environment:
+      DB_ENGINE: postgres
+      DB_HOST: database
+    depends_on:
+      - database
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/app/media
+volumes:
+  postgres_data:
+  media_data:
