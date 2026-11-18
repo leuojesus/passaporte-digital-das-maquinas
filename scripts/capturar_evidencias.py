@@ -10,6 +10,9 @@ import subprocess
 import urllib.request
 from pathlib import Path
 
+# Ao executar um arquivo de scripts/, incluir o diretório raiz no sys.path.
+RAIZ_PROJETO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(RAIZ_PROJETO))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 import django
