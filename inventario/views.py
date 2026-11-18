@@ -69,6 +69,7 @@ def maquina_detalhe(request, pk):
     return render(request, "inventario/maquina_detalhe.html", {"maquina": maquina})
 
 @login_required
+@permission_required("inventario.view_maquina", raise_exception=True)
 @permission_required("inventario.view_documento", raise_exception=True)
 @require_GET
 def documento_abrir(request, pk):
