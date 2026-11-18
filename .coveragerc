@@ -1,0 +1,9 @@
+[run]
+source = inventario
+omit =
+    */tests.py
+    */test_*.py
+    */migrations/*
+[report]
+show_missing = True
+precision = 0

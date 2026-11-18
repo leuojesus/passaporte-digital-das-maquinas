@@ -24,7 +24,7 @@ def maquinas(request):
     q = request.GET.get("q", "").strip()[:100]
     itens = Maquina.objects.filter(ativo=True)
     if q:
-        itens = itens.filter(Q(modelo__icontains=q) | Q(numero_serie__icontains=q))
+        itens = itens.filter(Q(modelo__icontains=q) | Q(numero_serie__icontains=q) | Q(cliente__icontains=q))
     pagina = Paginator(itens.order_by("modelo", "numero_serie"), 10).get_page(request.GET.get("page"))
     return render(request, "inventario/maquinas.html", {"maquinas": pagina.object_list, "page_obj": pagina, "q": q})
 
